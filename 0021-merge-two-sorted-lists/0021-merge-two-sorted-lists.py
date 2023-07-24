@@ -24,11 +24,11 @@ class Solution(object):
     - append the smaller of the two node values to the dummyhead LL
     - increment the pointer on the LL whose value was added to the dummyhead LL
     - repeat until the value both LL is None
-    - append final elements
+    - append remaining elements
     
     Evaluate
-    Time: O(n)
-    Space: O(m + n)
+    Time: O(m + n)
+    Space: O(1)
     """
     def mergeTwoLists(self, list1, list2):
         """
@@ -43,13 +43,16 @@ class Solution(object):
         while list1 and list2:
             if list1.val < list2.val:
                 prev.next = list1
-                prev = list1
+                # prev = list1
                 list1 = list1.next
             else:
                 prev.next = list2
-                prev = list2
+                # prev = list2
                 list2 = list2.next
+            prev = prev.next # update LL over here rather than two extra statements
         
+        # Very unnecessary - just set the next LL value to the first remaining node
+        """
         while list1:
             prev.next = list1
             prev = list1
@@ -59,5 +62,13 @@ class Solution(object):
             prev.next = list2
             prev = list2
             list2 = list2.next
+        """
+        if list1:
+            prev.next = list1
+        if list2:
+            prev.next = list2
+        
+
+        
         
         return dummy.next
