@@ -56,8 +56,8 @@ class Solution(object):
     Plan
     - slow pointer incremented by 1 node each iteration; fast pointer incremented by 2 nodes each iteration
     - return True if node at both pointers is same
-    - repeat while both pointers are not None
-    - return False
+    - repeat while current and next fast pointer node are valid (worst case, fast.next.next is None, but won't cause error during update)
+    - if loop breaks, return False
     
     Evaluate
     Time: O(n) - Floyd's Tortoise and Hare
@@ -68,19 +68,12 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
-        if head == None:
-            return False
+        slow, fast = head, head
         
-        slow = head
-        fast = head.next
-        
-        while slow and fast:
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
             if slow == fast:
                 return True
-            slow = slow.next
-            try:
-                fast = fast.next.next
-            except:
-                return False
         return False
         
