@@ -17,7 +17,7 @@ class Solution(object):
     1->2
     False
     
-    1->
+    1->2->3->4->5->6
     False
     
     Match
@@ -28,17 +28,55 @@ class Solution(object):
     - create encountered set
     - set pointer to head
     - if node is in encountered, return false; else, add node to encountered and increment pointer
+    
+    - constant memory: two-pointer approach
+    - 
+    
+    Evaluate
+    Time: O(n)
+    Space: O(n)
+    """
+    # Naive
+    # def hasCycle(self, head):
+    #     """
+    #     :type head: ListNode
+    #     :rtype: bool
+    #     """
+    #     encountered = set()
+    #     while head:
+    #         if head in encountered:
+    #             return True
+    #         encountered.add(head)
+    #         head = head.next
+    #     return False
+    
+    # Constant memory
+    
+    """
+    Plan
+    - slow pointer incremented by 1 node each iteration; fast pointer incremented by 2 nodes each iteration
+    - return True if node at both pointers is same
+    - repeat while both pointers are not None
+    - return False
     """
     def hasCycle(self, head):
         """
         :type head: ListNode
         :rtype: bool
         """
-        encountered = set()
-        while head:
-            if head in encountered:
+        if head == None:
+            return False
+        
+        slow = head
+        fast = head.next
+        
+        while slow and fast:
+            if slow == fast:
                 return True
-            encountered.add(head)
-            head = head.next
+            slow = slow.next
+            try:
+                fast = fast.next.next
+            except:
+                return False
         return False
         
