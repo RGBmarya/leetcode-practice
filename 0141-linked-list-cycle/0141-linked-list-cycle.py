@@ -58,6 +58,10 @@ class Solution(object):
     - return True if node at both pointers is same
     - repeat while both pointers are not None
     - return False
+    
+    Evaluate
+    Time: O(n) - Floyd's Tortoise and Hare
+    Space: O(1)
     """
     def hasCycle(self, head):
         """
