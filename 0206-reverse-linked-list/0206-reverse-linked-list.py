@@ -24,7 +24,7 @@ class Solution(object):
     - two-pointer approach: prev node, current node
     - While node is not None:
         - set node.next to prev element
-        - increment node, update prev
+        - increment pointer, update prev
     
     Evaluate
     Time: O(n)
@@ -37,13 +37,12 @@ class Solution(object):
         :rtype: ListNode
         """
         prev = None
-        while head:
-            next_node = head.next
-            head.next = prev
-            prev = head
-            if next_node != None:
-                head = next_node
-            else:
-                return head
-        return head
+        curr = head
+        
+        while curr:
+            next_node = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_node
+        return prev
         
