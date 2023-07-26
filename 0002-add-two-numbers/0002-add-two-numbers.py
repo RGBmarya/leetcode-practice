@@ -51,23 +51,15 @@ class Solution(object):
         res = dummy
         
         carry = 0
-        while l1 or l2:
-            if not l1:
-                place_sum = l2.val
-                l2 = l2.next
-            elif not l2:
-                place_sum = l1.val
-                l1 = l1.next
-            else:
-                place_sum = l1.val + l2.val
-                l1 = l1.next
-                l2 = l2.next
-            place_sum += carry
+        while l1 or l2 or carry:
+            v1 = l1.val if l1 else 0
+            v2 = l2.val if l2 else 0
+
+            place_sum = v1 + v2 + carry
             carry = place_sum // 10
             res.next = ListNode(place_sum % 10)
             res = res.next
-
-        if carry == 1:
-            res.next = ListNode(1)
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
         return dummy.next
             
