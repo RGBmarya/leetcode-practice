@@ -14,12 +14,15 @@ Match
 Heap
 
 Plan
-- min heap of size k
+- min heap of size k --> min heap of k largest elements
 - initialize minheap with at most k elements
 - add
     - push new element to heap
     - if minheap size > k, pop smallest element
     - return min element of minheap
+
+
+Evaluate
 
 """
 class KthLargest(object):
