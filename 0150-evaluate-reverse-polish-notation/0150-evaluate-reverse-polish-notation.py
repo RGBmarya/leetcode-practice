@@ -19,7 +19,7 @@ Plan
 
 Evaluate
 Time: O(n)
-Space: O(n/2)
+Space: O(n)
 """
 
 class Solution:
