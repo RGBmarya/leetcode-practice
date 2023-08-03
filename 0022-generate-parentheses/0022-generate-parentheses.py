@@ -18,21 +18,21 @@ Plan
 
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        res = []
+        stack = []
+        res = []          
         
-        
-        def generate(string):
-            counts = {}
-            for c in string:
-                counts[c] = 1 + counts.get(c, 0)
+        def backtrack(nOpen, nClose):      
+            if nOpen == nClose == n: 
+                res.append("".join(stack))
+                return
+            if nOpen < n:
+                stack.append("(")
+                backtrack(nOpen + 1, nClose)
+                stack.pop()
+            if nClose < nOpen:
+                stack.append(")")
+                backtrack(nOpen, nClose + 1)
+                stack.pop()
                 
-            if counts.get("(", 0) == counts.get(")", 0) == n:
-                res.append(string)
-                return 
-            if counts.get("(", 0) < n:
-                generate(string + "(")
-            if counts.get(")", 0) < counts.get("(", 0):
-                generate(string + ")")
-                
-        generate("(")
+        backtrack(0, 0)
         return res
