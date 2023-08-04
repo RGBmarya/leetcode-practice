@@ -18,7 +18,7 @@ class Twitter:
     def postTweet(self, userId: int, tweetId: int) -> None:
         self.timeline.appendleft((userId, tweetId))
 
-    # O(1)
+    # ~O(n), n = number of tweets in timeline (assuming user or followee's tweets were made at the beginning)  
     def getNewsFeed(self, userId: int) -> List[int]:
         res = []
         i = 0
