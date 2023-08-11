@@ -23,16 +23,33 @@ Space: O(n)
 #         self.left = left
 #         self.right = right
 class Solution:
-    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        q = deque()
-        q.append(root)
-        while len(q) > 0:
-            node = q.popleft()
-            if node: 
-                temp = node.left
-                node.left = node.right
-                node.right = temp
+#     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+#         q = deque()
+#         q.append(root)
+#         while len(q) > 0:
+#             node = q.popleft()
+#             if node: 
+#                 temp = node.left
+#                 node.left = node.right
+#                 node.right = temp
 
-                q.append(node.left)
-                q.append(node.right)
+#                 q.append(node.left)
+#                 q.append(node.right)
+#         return root
+    
+    """
+    DFS - pre-order // recursive
+    Time:
+    Space: 
+    """
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root:
+            return None
+        temp = root.left
+        root.left = root.right
+        root.right = temp
+        
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        
         return root
