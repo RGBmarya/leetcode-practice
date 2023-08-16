@@ -22,19 +22,12 @@ class Solution(object):
     Plan
     - multi-pass, two-pointer
     - first pass: slow pointer, fast pointer (2x) --> determine midpoint
-    - reverse right half of linked list
-    - second pass: left pointer at 0, right pointer at n
-    - while left != right:
-        - if from left:
-            - left -> right
-            - shift left
-            - change to right
-        - if from right:
-            - right -> left
-            - shift right
-            - change to left
-    - midpoint node.next = None
-    - return
+    - split LL into two halves and reverse right half of linked list  
+    - while right node is not None:
+        - left -> right
+        - right -> left.next
+        - increment left, right
+    
     """
     def reorderList(self, head):
         """
