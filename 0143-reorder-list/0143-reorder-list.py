@@ -41,7 +41,6 @@ class Solution(object):
             fast = fast.next.next
         # slow is now at midpoint
         
-        
         curr = slow.next
         prev = None
         slow.next = None
@@ -51,7 +50,7 @@ class Solution(object):
             curr.next = prev
             prev = curr
             curr = nxt
-        
+            
         left = head
         right = prev
         
