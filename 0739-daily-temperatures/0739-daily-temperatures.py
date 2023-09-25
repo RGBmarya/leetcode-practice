@@ -12,7 +12,7 @@ for each element at index i, update res[i] with number of iterations until warme
 
 Evaluate
 Time: O(n^2)
-Space: O(n)
+Space: O(1)
 """
 
 class Solution:
@@ -45,8 +45,8 @@ class Solution:
         stack = []
         for i, temp in enumerate(temperatures):
             while stack and temp > stack[-1][0]:
-                removed = stack.pop()
-                res[removed[1]] = i - removed[1]
+                prev_temp, temp_index = stack.pop()
+                res[temp_index] = i - temp_index
             stack.append((temp, i))
         
         while stack:
