@@ -26,14 +26,15 @@ class Solution:
         
         for i in range(len(numbers)):
             complement = target - numbers[i]
-            if complement > numbers[i]:
-                left = i + 1
-                right = len(numbers) - 1
-            elif complement < numbers[i]:
-                left = 0
-                right = i - 1
-            else:
+            # if complement > numbers[i]:
+            #     left = i + 1
+            #     right = len(numbers) - 1
+            # elif complement < numbers[i]:
+            if complement == numbers[i]:
                 return [i + 1, i + 2]
+            left = 0
+            right = len(numbers) - 1
+
             
             while left <= right:
                 middle = (left + right) // 2
