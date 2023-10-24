@@ -24,7 +24,11 @@ class Solution:
                 sub_index = mid;
                 break;
         
+        if not (left <= right):
+            return False
+        
         left, right = 0, len(matrix[sub_index]) - 1
+        
         
         while left <= right:
             mid = (left + right) // 2
