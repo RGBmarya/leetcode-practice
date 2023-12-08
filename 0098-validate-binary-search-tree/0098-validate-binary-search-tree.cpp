@@ -10,23 +10,19 @@
  * };
  */
 
-// for tree to be valid, LEFT subtree has to be valid, RIGHT subtree has to be vaild, 
-// root has to be greater than max of LEFT (if exists) AND root has to be less than min of right (if exists)
-// base case: if node == nullptr, then valid
-// if 
-// recursive step: 
+// valid tree: left subtree sorted, right subtree sorted, root is between max of left and min of right
 class Solution {
 public:
-    TreeNode* max_of_tree(TreeNode *root) {
-        if (root->right) {
-            return max_of_tree(root->right);
+    TreeNode *min_of_tree(TreeNode *root) {
+        if (root && root->left) {
+            return min_of_tree(root->left);
         }
-        return root; 
+        return root;
     }
     
-    TreeNode* min_of_tree(TreeNode *root) {
-        if(root->left) {
-            return min_of_tree(root->left);
+    TreeNode *max_of_tree(TreeNode *root) {
+        if (root && root->right) {
+            return max_of_tree(root->right);
         }
         return root;
     }
@@ -35,15 +31,13 @@ public:
         if (!root) {
             return true;
         }
-        
-        bool root_valid = true;
+        bool root_sorted = true;
         if (root->left) {
-            root_valid = root->val > max_of_tree(root->left)->val;
+            root_sorted = root->val > max_of_tree(root->left)->val;
         }
-        if (root_valid && root->right) {
-            root_valid = root->val < min_of_tree(root->right)->val;
+        if (root_sorted && root->right) {
+            root_sorted = root->val < min_of_tree(root->right)->val;
         }
-        
-        return root_valid && isValidBST(root->left) && isValidBST(root->right);
+        return root_sorted && isValidBST(root->left) && isValidBST(root->right);
     }
 };
