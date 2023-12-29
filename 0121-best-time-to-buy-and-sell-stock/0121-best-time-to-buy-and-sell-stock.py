@@ -1,22 +1,25 @@
 """
-Plan
-- maximize --> optimize: sliding window problem
-- two pointers, slow and fast
-- profit at any point = prices[fast] - prices[slow]
-- increment the fast pointer over the entire list, keeping track of the index where the profit was maximized
-- fixing the fast pointer at this index, increment the slow index, keeping track of where the profit was maximized
-- return the different prices[fast] - prices[slow], or 0 if its negative
+BUY LOW, SELL HIGH
+Understand: [7, 9, 2, 3, 6]
 
+Match: sliding window
 
+Plan:
+- left, right = 0, 1
+- keep track of max profit, profit = prices[right] - prices[left]
+– update max
+- calculate profit - if negative, shift both pointers; else, just shift right pointer
 """
+
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        res = 0
-        
-        lowest = prices[0]
-        for price in prices:
-            if price < lowest:
-                lowest = price
-            res = max(res, price - lowest)
-        return res
+        left, right = 0, 1
+        maxP = 0
+        while right < len(prices):
+            curP = prices[right] - prices[left]
+            maxP = max(curP, maxP)
+            if curP < 0:
+                left = right
+            right += 1
+        return maxP
