@@ -9,6 +9,10 @@ Plan:
 - keep track of max profit, profit = prices[right] - prices[left]
 – update max
 - calculate profit - if negative, shift both pointers; else, just shift right pointer
+
+Evaluate
+Time: O(n)
+Space: O(1)
 """
 
 
@@ -17,9 +21,10 @@ class Solution:
         left, right = 0, 1
         maxP = 0
         while right < len(prices):
-            curP = prices[right] - prices[left]
-            maxP = max(curP, maxP)
-            if curP < 0:
+            if prices[left] < prices[right]:
+                curP = prices[right] - prices[left]
+                maxP = max(curP, maxP)
+            else:                
                 left = right
             right += 1
         return maxP
