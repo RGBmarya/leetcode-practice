@@ -31,6 +31,6 @@ class Solution:
                 substr_chars.remove(s[left])
                 left += 1
             substr_chars.add(s[right])
-            res = max(res, right - left + 1)
+            res = max(res, len(substr_chars))
             right += 1
         return res
