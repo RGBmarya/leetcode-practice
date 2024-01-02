@@ -9,29 +9,28 @@ Match
 
 Plan
 - left, right pointer - start and end of window --> start off at 0
+expand right side of window until you encounter a letter that is in the substring...
 - while right pointer < len(string)
-    - expand right side of window until you encounter a letter that you have encountered before
-    - keep track of this length (update maxLen variable)
-    - contract left side of window until the duplicate letter is removed 
-    - return to top
+    - if rightmost char is substring, contract left side of window until duplicate letter is removed
+    - add rightmost char to set of chars in substring
+    - update max length
+    - increment right pointer
 
+Evaluate
+Time: O(n)
+Space: O(n)
 """
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        maxLen = 0
+        res = 0
         left, right = 0, 0
-        encountered = set()
+        substr_chars = set()
         while right < len(s):
-            if s[right] in encountered:
-                print(encountered)
-                maxLen = max(maxLen, right - left)
-                while s[left] != s[right]:
-                    encountered.remove(s[left])
-                    left += 1
+            while s[right] in substr_chars:
+                substr_chars.remove(s[left])
                 left += 1
-                
-            encountered.add(s[right])
-            right += 1      
-        maxLen = max(maxLen, right - left)
-        return maxLen
+            substr_chars.add(s[right])
+            res = max(res, right - left + 1)
+            right += 1
+        return res
