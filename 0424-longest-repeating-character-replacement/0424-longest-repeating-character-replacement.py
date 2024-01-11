@@ -16,8 +16,9 @@ Plan
     - if len(substring) - frq of most common > k (i.e., cannot replace all non-most common chars), increment left ptr, decrement count of left char
     - update max length of substring
     
-Evaluate:
-    
+Evaluate
+Time: O(n * 26) = O(n)
+Space: O(26)
     
 """
 class Solution:
